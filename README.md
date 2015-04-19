@@ -15,12 +15,12 @@ This is a raw springMVC MAVEN project.
 
 * core
 
-** frame(GenericDao, GenericService)
+  ** frame(GenericDao, GenericService)
 
-** common
+  ** common
 
 * web
 
-** common
+  ** common
 
-** controller
+  ** controller
