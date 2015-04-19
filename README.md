@@ -42,3 +42,31 @@ mine -> apache-tomcat-6.0.36
 * maven
 
 mine -> apache-maven-3.0.5-bin
+
+## few things to do
+
+to convert to your own project, you have few changes to make.
+
+* web.xml
+
+> change packages to scan in `JerseyServlet` from `org.company` to your own packages.
+
+* applicationContext.xml
+
+> change packages to scan in `component-scan` from `org.company` to your own packages.
+
+`org.company` represents for packages those contain any annotations except for `@Controller`.
+
+* applicationContext-servlet.xml
+
+> change packages to scan in `component-scan` from `org.company.web` to your own packages.
+
+`org.company.web` represents for packages those contain `@Controller`s.
+
+* applicationContext-datasource.xml
+
+> change datasource settings to you own dataserver.
+
+* now you are good to go !
+
+
