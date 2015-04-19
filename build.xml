@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build" default="change-identifier" basedir="." 
+    xmlns:artifact="antlib:org.apache.maven.artifact.ant" 
+    xmlns:rsel="antlib:org.apache.tools.ant.types.resources.selectors">
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="lib/ant-contrib-1.0b3.jar" />
+        </classpath>
+    </taskdef>
+	<property name="old-group" value="com.rails"></property>
+	<property name="old-project" value="ecommerce"></property>
+    <target name="change-identifier">
+        <input message="请输入组织名称." defaultvalue="com.rails" addproperty="group" />
+
+          <input message="请输入项目名称." defaultvalue="wifi" addproperty="project" />
+        
+        <input message="组织名称 ${group}, 项目名称: ${project} -- 该修改只允许操作一次是否继续?" addproperty="continue" validargs="y,n" defaultvalue="y" />
+
+        <if>
+            <equals arg1="${continue}" arg2="y" />
+            <then>
+                <echo message="原组织名称 : ${old-group}" />
+                <echo message="原项目名称 : ${old-project}" />
+                <echo message="新组织名称 : ${group}" />
+                <echo message="新项目名称 : ${project}" />
+            	<replace file="pom.xml" token="${old-group}" value="${group}" summary="yes" excludes="target/" />
+            	<replace file="pom.xml" token="${old-project}" value="${project}" summary="yes" excludes="target/" />
+            	<replace file="core/pom.xml" token="${old-group}" value="${group}" summary="yes" excludes="target/" />
+            	<replace file="core/pom.xml" token="${old-project}" value="${project}" summary="yes" excludes="target/" />
+            	<replace file="admin/pom.xml" token="${old-group}" value="${group}" summary="yes" excludes="target/" />
+            	<replace file="admin/pom.xml" token="${old-project}" value="${project}" summary="yes" excludes="target/" />
+            	<replace file="web/pom.xml" token="${old-group}" value="${group}" summary="yes" excludes="target/" />
+            	<replace file="web/pom.xml" token="${old-project}" value="${project}" summary="yes" excludes="target/" />
+            	
+            
+            </then>
+        </if>
+    </target>
+
+</project>

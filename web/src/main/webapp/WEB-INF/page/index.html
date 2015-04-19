@@ -1,0 +1,25 @@
+<html>
+<head>
+
+<script src="../js/custom.js" th:src="@{/js/custom.js}"></script>
+<title>页面标题</title>
+</head>
+<body>
+
+<h1>My First Heading</h1>
+
+<p>My first paragraph.</p>
+<p th:text="${customvalue}"></p>
+<p th:text="'static:'+${static}"></p>
+<p th:text="'config:'+${profile}"></p>
+
+<div>
+<h2>data in table</h2>
+<ul>
+<li th:each="item : ${list}" th:text="${item.name}"></li>
+</ul>
+
+</div>
+
+</body>
+</html>
