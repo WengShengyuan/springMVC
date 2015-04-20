@@ -33,13 +33,7 @@
 	        </list>  
       </property>  
 	</bean>
-	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://198.216.7.118:3306/jspxcms" />
-		<property name="user" value="root" />
-		<property name="password" value="123456" />
-	</bean> -->
+	
 	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">

@@ -21,6 +21,17 @@ public interface GenericDao<T> {
     
     public List<T> queryByStringEqualMap (HashMap<String, Object> map)  throws Exception;
     
+    /* SPLIT PAGE
+     * PAGEINDEX START AT 0
+     * */
+    public List<T> findAll (int pageIndex, int resultPerPage) throws Exception;  
+    
+    public List<T> queryByStringInMap(HashMap<String, List<Object>> map,int pageIndex, int resultPerPage)throws Exception ;
+    
+    public List<T> queryByString(String sql,int pageIndex, int resultPerPage) throws Exception ;
+    
+    public List<T> queryByStringEqualMap (HashMap<String, Object> map,int pageIndex, int resultPerPage)  throws Exception;
+    
     /**
      * 清空表
      * @throws Exception

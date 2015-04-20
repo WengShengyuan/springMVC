@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-
 /**
  * @Deprecated
  */
@@ -39,7 +38,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			em.persist(entity);
 			return (T) entity;
 		} catch (Exception e) {
-			throw new Exception(getPersistentClass().getName()+"查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 	}
 
@@ -49,7 +49,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			Object object = em.merge(entity);
 			return (T) object;
 		} catch (Exception e) {
-			throw new Exception(getPersistentClass().getName()+"查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 	}
 
@@ -58,7 +59,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			Object object = em.merge(entity);
 			em.remove(object);
 		} catch (Exception e) {
-			throw new Exception(getPersistentClass().getName()+"查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 	}
 
@@ -66,7 +68,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		try {
 			return (T) em.find(this.getPersistentClass(), id);
 		} catch (Exception e) {
-			throw new Exception(getPersistentClass().getName()+"查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 	}
 
@@ -78,7 +81,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 					.createQuery(sql, this.getPersistentClass());
 			resultList = query.getResultList();
 		} catch (Exception e) {
-			throw new Exception(getPersistentClass().getName()+"查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 		if (resultList == null || (resultList != null && resultList.size() < 1)) {
 			// throw new BusinessWifiException("查询结果为空");
@@ -110,7 +114,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			}
 			resultList = query.getResultList();
 		} catch (Exception e) {
-			throw new Exception(getPersistentClass().getName()+"查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 		if (resultList == null || (resultList != null && resultList.size() < 1)) {
 			// throw new BusinessWifiException("查询结果为空");
@@ -126,7 +131,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		try {
 			resultList = (List<T>) em.createQuery(sql).getResultList();
 		} catch (Exception e) {
-			throw new Exception(getPersistentClass().getName()+"查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 		if (resultList == null || (resultList != null && resultList.size() < 1)) {
 			// throw new BusinessWifiException("查询结果为空");
@@ -168,8 +174,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			return resultList;
 	}
 
-	
-
 	@Override
 	public void clearTable() throws Exception {
 		List<T> resultList = null;
@@ -178,13 +182,122 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			TypedQuery<T> query = em
 					.createQuery(sql, this.getPersistentClass());
 			resultList = query.getResultList();
-			for(T obj : resultList){
+			for (T obj : resultList) {
 				delete(obj);
 			}
 		} catch (Exception e) {
 			throw new Exception("查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
-		
+
+	}
+
+	@Override
+	public List<T> findAll(int pageIndex, int resultPerPage) throws Exception {
+		List<T> resultList = null;
+		try {
+			String sql = "from " + getPersistentClass().getName() + " obj ";
+			TypedQuery<T> query = em
+					.createQuery(sql, this.getPersistentClass())
+					.setFirstResult(pageIndex * resultPerPage)
+					.setMaxResults(resultPerPage);
+			resultList = query.getResultList();
+		} catch (Exception e) {
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+		}
+		if (resultList == null || (resultList != null && resultList.size() < 1)) {
+			// throw new BusinessWifiException("查询结果为空");
+			return resultList;
+		} else
+			return resultList;
+
+	}
+
+	@Override
+	public List<T> queryByStringInMap(HashMap<String, List<Object>> map,
+			int pageIndex, int resultPerPage) throws Exception {
+		List<T> resultList = null;
+		try {
+			StringBuilder sql = new StringBuilder("SELECT o from "
+					+ getPersistentClass().getName() + " o WHERE ");
+			StringBuilder conStr = new StringBuilder("");
+			// 拼接条件
+			for (String key : map.keySet()) {
+				List<Object> value = map.get(key);
+				conStr = conStr.append(String.format(" o.%s in (:%s) and", key,
+						key));
+			}
+			// 去掉最后一个and
+			sql.append(conStr.toString().substring(0, conStr.length() - 4));
+			Query query = em.createQuery(sql.toString())
+					.setFirstResult(pageIndex * resultPerPage)
+					.setMaxResults(resultPerPage);
+			for (String key : map.keySet()) {
+				query = query.setParameter(key, map.get(key));
+			}
+			resultList = query.getResultList();
+		} catch (Exception e) {
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+		}
+		if (resultList == null || (resultList != null && resultList.size() < 1)) {
+			// throw new BusinessWifiException("查询结果为空");
+			return resultList;
+		} else
+			return resultList;
+	}
+
+	@Override
+	public List<T> queryByString(String sql, int pageIndex, int resultPerPage)
+			throws Exception {
+		List<T> resultList = null;
+		try {
+			resultList = (List<T>) em.createQuery(sql)
+					.setFirstResult(pageIndex * resultPerPage)
+					.setMaxResults(resultPerPage).getResultList();
+		} catch (Exception e) {
+			throw new Exception(getPersistentClass().getName()
+					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
+		}
+		if (resultList == null || (resultList != null && resultList.size() < 1)) {
+			// throw new BusinessWifiException("查询结果为空");
+			return resultList;
+		} else
+			return resultList;
+	}
+
+	@Override
+	public List<T> queryByStringEqualMap(HashMap<String, Object> map,
+			int pageIndex, int resultPerPage) throws Exception {
+		List<T> resultList = null;
+		try {
+			StringBuilder sql = new StringBuilder("SELECT o from "
+					+ getPersistentClass().getName() + " o WHERE ");
+			StringBuilder conStr = new StringBuilder("");
+			// 拼接条件
+			for (String key : map.keySet()) {
+				Object value = map.get(key);
+				conStr = conStr.append(String.format(" o.%s = :%s and", key,
+						key));
+			}
+			// 去掉最后一个and
+			sql.append(conStr.toString().substring(0, conStr.length() - 4));
+			Query query = em.createQuery(sql.toString())
+					.setFirstResult(pageIndex * resultPerPage)
+					.setMaxResults(resultPerPage);
+			for (String key : map.keySet()) {
+				query = query.setParameter(key, map.get(key));
+			}
+			resultList = query.getResultList();
+		} catch (Exception e) {
+			throw new Exception("查询数据库出错，请确认sql语句是否正确或者链接是否正确。"
+					+ e.getMessage());
+		}
+		if (resultList == null || (resultList != null && resultList.size() < 1)) {
+			return resultList;
+			// throw new BusinessWifiException("查询结果为空");
+		} else
+			return resultList;
 	}
 
 }
