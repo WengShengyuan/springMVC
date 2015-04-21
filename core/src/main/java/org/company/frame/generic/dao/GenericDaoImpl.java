@@ -1,15 +1,18 @@
 package org.company.frame.generic.dao;
 
-import java.io.File;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.ejb.EntityManagerFactoryImpl;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.orm.jpa.EntityManagerFactoryInfo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,6 +24,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 
 	@PersistenceContext
 	protected EntityManager em;
+	
 
 	private Class<T> persistentClass;
 
@@ -33,6 +37,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
+	
 	public T save(Object entity) throws Exception {
 		try {
 			em.persist(entity);
@@ -43,6 +48,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		}
 	}
 
+	
 	public T update(Object entity) throws Exception {
 		try {
 
@@ -54,6 +60,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		}
 	}
 
+	
 	public void delete(Object entity) throws Exception {
 		try {
 			Object object = em.merge(entity);
@@ -63,8 +70,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 	}
-
-	public T findById(String id) throws Exception {
+	
+	public T findById(long id) throws Exception {
 		try {
 			return (T) em.find(this.getPersistentClass(), id);
 		} catch (Exception e) {
@@ -72,7 +79,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 					+ "查询数据库出错，请确认sql语句是否正确或者链接是否正确。");
 		}
 	}
-
+	
 	public List<T> findAll() throws Exception {
 		List<T> resultList = null;
 		try {
@@ -89,7 +96,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			return resultList;
 		} else
 			return resultList;
-
 	}
 
 	@Override
@@ -125,6 +131,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 
 	}
 
+	
 	@Override
 	public List<T> queryByString(String sql) throws Exception {
 		List<T> resultList = null;
@@ -174,6 +181,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			return resultList;
 	}
 
+	
 	@Override
 	public void clearTable() throws Exception {
 		List<T> resultList = null;
@@ -299,5 +307,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		} else
 			return resultList;
 	}
+
 
 }

@@ -3,6 +3,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
        http://www.springframework.org/schema/context
@@ -10,7 +11,8 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+       http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd">
 
 
 
@@ -19,6 +21,10 @@
 		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.cache.annotation.Cacheable" />
 	</context:component-scan>
 
 	<!-- Allow annotation driven controllers -->
@@ -38,7 +44,7 @@
 		<property name="cacheable" value="false" /><!-- 是否开启缓存,开发模式下关闭,部署时应该打开 -->
 		<property name="characterEncoding" value="UTF-8" />
 	</bean>
-	
+
 	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
 		<property name="additionalDialects">
@@ -54,7 +60,7 @@
 		<property name="order" value="1" />
 		<property name="characterEncoding" value="UTF-8" />
 	</bean>
-	
+
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
@@ -65,7 +71,7 @@
 		</property>
 	</bean>
 
-	<!-- 配置 文件上传的支持 ,最大上传文件大小1G-->
+	<!-- 配置 文件上传的支持 ,最大上传文件大小1G -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1024000000" />
@@ -83,7 +89,4 @@
 			</list>
 		</property>
 	</bean>
-	
-	
-
 </beans>

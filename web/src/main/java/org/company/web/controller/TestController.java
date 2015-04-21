@@ -1,5 +1,6 @@
 package org.company.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,34 +28,40 @@ public class TestController {
 	public ModelAndView home(){
 		ModelAndView view = new ModelAndView();
 		view.setViewName("index");
-		List<TestTable> list = null;
+		List<TestTable> list = new ArrayList<TestTable>();
+		long timetosql = 0;
 		try {
-			list = testTableService.findAll();
+			long startTime=System.currentTimeMillis();
+			list.add(testTableService.findById(100));
+			long endTime=System.currentTimeMillis();
+			timetosql = endTime - startTime;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		view.addObject("time",timetosql);
 		view.addObject("static", StaticValue.STATICPARAM);
 		view.addObject("profile",config.getTESTPARAM());
 		view.addObject("list", list);
 		view.addObject("customvalue", "This is a custom text.");
+		
+		
+		
 		return view;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/addOne")
-	public List<TestTable> addOne(){
-		TestTable o = new TestTable();
-		List<TestTable> list = null;
-		o.setName("test");
+	public boolean addOne(){
+		
 		try {
-			testTableService.save(o);
-			list = testTableService.findAll();
+			testTableService.batchAdd(10000);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 		
-		return list;
+		
 		
 	}
 	

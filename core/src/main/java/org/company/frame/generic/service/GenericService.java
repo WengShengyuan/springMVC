@@ -11,7 +11,7 @@ public interface GenericService<T> {
 	  
 	    public List<T> findAll() throws Exception;  
 	    
-	    public T findById(String id) throws Exception; 
+	    public T findById(long id) throws Exception; 
 	    
 	    public void clearTable() throws Exception;
 }

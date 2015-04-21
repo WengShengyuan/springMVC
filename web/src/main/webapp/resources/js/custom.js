@@ -1,4 +1,4 @@
 window.onload=function()
 {
-   alert('page loaded');
+   console.log('page loaded');
 }

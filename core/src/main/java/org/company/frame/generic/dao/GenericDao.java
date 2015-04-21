@@ -13,7 +13,7 @@ public interface GenericDao<T> {
   
     public List<T> findAll () throws Exception;  
     
-    public T findById(String id) throws Exception ;  
+    public T findById(long id) throws Exception ;  
     
     public List<T> queryByStringInMap(HashMap<String, List<Object>> map)throws Exception ;
     

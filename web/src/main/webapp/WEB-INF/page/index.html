@@ -14,7 +14,7 @@
 <p th:text="'config:'+${profile}"></p>
 
 <div>
-<h2>data in table</h2>
+<h2 th:text="'data in table' + ${time}">data in table</h2>
 <ul>
 <li th:each="item : ${list}" th:text="${item.name}"></li>
 </ul>

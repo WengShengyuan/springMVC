@@ -51,14 +51,5 @@ public abstract class GenericServiceImpl<T> implements GenericService<T>{
 		genericDao.clearTable();
 	}
 
-//	@Override
-//	public List<T> findAll() {
-//		return genericDao.findAll();
-//	}
-//
-//	@Override
-//	public T findById(Long id) {
-//		return genericDao.findById(id);
-//	}
 
 }

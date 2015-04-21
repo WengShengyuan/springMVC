@@ -13,27 +13,48 @@
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 	">
-
+	
+	<!-- 缓存配置 -->
+	<import resource="applicationContext-ehcache.xml" />
+	
+	<!-- spring扮演了容器的角色。完全掌管JPA。LocalContainerEntityManagerFactoryBean会根据persistence.xml创造一个PersistenceUnitInfo实现
+	
+	LocalContainerEntityManagerFactoryBean：适用于所有环境的FactoryBean，能全面控制EntityManagerFactory配置，非常适合那种需要细粒度定制的环境。
+		persistenceUnitManager：用于获取JPA持久化单元，默认实现DefaultPersistenceUnitManager用于解决多配置文件情况。
+		dataSource：用于指定Spring定义的数据源。
+		persistenceXmlLocation:用于指定JPA配置文件，对于多JPA配置文件情况请选择设置persistenceUnitManager属性来解决。
+		persistenceUnitName：用于指定持久化单元名称。
+		persistenceProvider：用于指定持久化实现厂商类，如hibernate为：org.hibernate.ejb.HibernateProvider 类。
+		jpaVendorAdapter：用于设置JPA实现厂商的特定属性，如设置hibernate的是否自动生成DDL的属性generateDdl，这些属性是厂商特定的，因此最好在这里设置。
+		jpaDialect:用于指定一些高级特性，如事务管理等。目前Spring提供HibernateJpaDialect，OpenJpaDialect，EclipseJpaDialect，TopLinkJpaDialect和DefaultJpaDialect实现。
+			注意DefaultJpaDialect不提供任何功能，因此在使用特定实现厂商的JPA实现时需要指定jpaDialect实现，如使用hibernate就使用HibernateJpaDialect。当指定jpaVendorAdapter
+			属性时可以不指定jpaDialect，会自动设置相应的JpaDialect实现；
+		jpaProperties和jpaPropertyMap：指定JPA属性；如Hibernate中指定是否显示SQL的“hibernate.show_sql”属性，对于jpaProperties设置的属性自动会放进jpaPropertyMap中；
+		loadTimeWeaver：用于指定LoadTimeWeaver实现，从而允许JPA 加载时修改相应的类文件。具体使用得参考相应的JPA规范实现厂商文档，如Hibernate就不需要指定loadTimeWeaver。
+		
+	-->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-	
 		<property name="persistenceProvider" ref="persistenceProvider" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 		<property name="jpaDialect" ref="jpaDialect" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>  
+				<prop key="javax.persistence.sharedCache.mode">ENABLE_SELECTIVE</prop>  
+				<prop key="hibernate.generate_statistics">true</prop>  
 			</props>
 		</property>
 		 <property name="packagesToScan">  
 	        <list>  
-	         
-	           <value>org.company</value>  
+	           <value>org.company.core</value>  
 	        </list>  
       </property>  
 	</bean>
-	
 	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
@@ -54,15 +75,12 @@
 
 
 	<context:annotation-config />
-	<!-- <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean"> 
-		<property name="persistenceUnitName" value="web" /> <property name="jpaVendorAdapter"> 
-		<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"> 
-		<property name="database" value="MYSQL" /> <property name="showSql" value="true" 
-		/> <property name="generateDdl" value="true" /> </bean> </property> </bean> -->
+	
 	<!--事务管理Bean -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	
 	<!--说明事务的配置使用的注解方式 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
