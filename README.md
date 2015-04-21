@@ -69,4 +69,10 @@ to convert to your own project, you have few changes to make.
 
 * now you are good to go !
 
+## update:
+
+* 2015-04-21 add entity ehcache support 
+
+ [spring data jpa hibernate ehcache](http://www.csdn123.com/html/mycsdn20140110/fc/fc7d2c0bc92333ca53e6ea920bd24bef.html)
+
 
