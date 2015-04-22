@@ -52,7 +52,16 @@ public class TestController {
 	
 	@ResponseBody
 	@RequestMapping(value="/flush")
-	public boolean flush(){
+	public boolean flush(HttpServletRequest request){
+		String newName = request.getParameter("newname");
+		String oldName = request.getParameter("oldname");
+		try {
+			testTableService.updateName(oldName, newName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		return true;
 	}

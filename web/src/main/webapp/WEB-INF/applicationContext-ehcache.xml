@@ -57,11 +57,11 @@
 		</property>
 		<property name="patterns">
 			<list>
-				<value>.*find.*</value>
+				<value>org.company.core.*.service.*find.*</value>
 			</list>
 		</property>
 	</bean>
-	<!-- flush 拦截器方法匹配 >
+	<!-- flush 拦截器方法匹配  -->
 	<bean id="methodCachePointCutAdvice" 
 		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">  
       <property name="advice">  
@@ -69,11 +69,11 @@
       </property>  
       <property name="patterns">  
         <list>  
-          <value>.*create.*</value>  
-          <value>.*update.*</value>  
-          <value>.*delete.*</value>  
+          <value>org.company.core.*.service.*create.*</value>  
+          <value>org.company.core.*.service.*update.*</value>  
+          <value>org.company.core.*.service.*delete.*</value>  
         </list>  
       </property>  
-    </bean -->
+    </bean>
 	
 </beans>

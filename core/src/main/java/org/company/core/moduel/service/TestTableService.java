@@ -11,6 +11,6 @@ public interface TestTableService extends GenericService<TestTable>{
 	
 	public List<TestTable> findByName(String name) throws Exception;
 	
-	public boolean flushRecord(String name) throws Exception;
+	public boolean updateName(String oldName, String newName) throws Exception;
 		
 }

@@ -64,9 +64,13 @@ public class TestTableServiceImpl implements TestTableService{
 		return testTableDao.batchAdd(time);
 	}
 
+
+	@Transactional
 	@Override
-	public boolean flushRecord(String name) throws Exception {
-		// TODO Auto-generated method stub
+	public boolean updateName(String oldName, String newName) throws Exception {
+		TestTable t = testTableDao.findByName(oldName).get(0);
+		t.setName(newName);
+		testTableDao.save(t);
 		return false;
 	}
 

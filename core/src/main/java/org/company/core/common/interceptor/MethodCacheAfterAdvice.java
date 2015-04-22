@@ -7,6 +7,7 @@ import net.sf.ehcache.Cache;
 
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
     
 public class MethodCacheAfterAdvice implements AfterReturningAdvice, InitializingBean    
@@ -21,7 +22,7 @@ public class MethodCacheAfterAdvice implements AfterReturningAdvice, Initializin
     public MethodCacheAfterAdvice() {    
         super();    
     }    
-    
+    @Transactional
     public void afterReturning(Object arg0, Method arg1, Object[] arg2, Object arg3) throws Throwable {    
         String className = arg3.getClass().getName();    
         List list = cache.getKeys();    

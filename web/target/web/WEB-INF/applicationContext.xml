@@ -52,7 +52,6 @@
 		<property name="interceptorNames">
 			<list>
 				<value>methodCachePointCut</value>
-				<value>methodCachePointCutAdvice</value>
 			</list>
 		</property>
 	</bean>
