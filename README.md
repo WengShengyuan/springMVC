@@ -79,6 +79,6 @@ to convert to your own project, you have a few changes to make.
  
  [Spring AOP+ehCache简单缓存系统解决方案](http://blog.csdn.net/linfanhehe/article/details/7690684)
 
-error when multiple pointcut exist, working on it.
+ *error when multiple pointcut exist, working on it.*
 
 
