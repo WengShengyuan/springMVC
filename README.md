@@ -43,9 +43,9 @@ mine -> apache-tomcat-6.0.36
 
 mine -> apache-maven-3.0.5-bin
 
-## few things to do
+## A few things to do
 
-to convert to your own project, you have few changes to make.
+to convert to your own project, you have a few changes to make.
 
 * web.xml
 
