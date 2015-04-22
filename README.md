@@ -74,5 +74,9 @@ to convert to your own project, you have few changes to make.
 * 2015-04-21 add entity ehcache support 
 
  [spring data jpa hibernate ehcache](http://www.csdn123.com/html/mycsdn20140110/fc/fc7d2c0bc92333ca53e6ea920bd24bef.html)
+ 
+ * 2015-04-22 add Service cache support (AOP)
+ 
+ [Spring AOP+ehCache简单缓存系统解决方案](http://blog.csdn.net/linfanhehe/article/details/7690684)
 
 
