@@ -51,5 +51,4 @@ public abstract class GenericServiceImpl<T> implements GenericService<T>{
 		genericDao.clearTable();
 	}
 
-
 }

@@ -18,9 +18,8 @@
 
 
 	<import resource="applicationContext-datasource.xml" />
-	<!-- import resource="applicationContext-shiro.xml" / -->
 
-<!-- 加载*.properties File -->
+	<!-- 加载*.properties File -->
 	<bean id="webConfig"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -29,10 +28,39 @@
 			</list>
 		</property>
 	</bean>
-		<!-- 扫描的包路径 去掉mvc的注解-->
-	<context:component-scan base-package="org.company">
-	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
 	
-
+	<!-- 扫描的包路径 去掉mvc的注解 -->
+	<context:component-scan base-package="org.company">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan> 
+	
+	
+	
+    
+	<import resource="applicationContext-ehcache.xml" />
+	
+	
+	
+	
+	<!-- AOP 的最终配置 -->
+	<!-- BEAN与find/get 拦截器关联 -->
+	<bean id="myService" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target">
+			<ref local="testTableServiceBean" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>methodCachePointCut</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 拦截BEAN -->
+	<bean id="testTableServiceBean" class="org.company.core.moduel.service.TestTableServiceImpl">
+	</bean>
+	
+	
+	
 </beans>

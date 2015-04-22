@@ -67,7 +67,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-                /WEB-INF/applicationContext-servlet.xml,/WEB-INF/applicationContext-ehcache.xml
+                /WEB-INF/applicationContext-servlet.xml
             </param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

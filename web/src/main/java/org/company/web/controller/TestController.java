@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.company.core.common.comstatic.ConfigStatic;
 import org.company.core.common.comstatic.StaticValue;
@@ -25,14 +26,17 @@ public class TestController {
 	private ConfigStatic config;
 	
 	@RequestMapping(value="/home")
-	public ModelAndView home(){
+	public ModelAndView home(HttpServletRequest request){
+		
+		String findName = request.getParameter("name");
+		
 		ModelAndView view = new ModelAndView();
 		view.setViewName("index");
 		List<TestTable> list = new ArrayList<TestTable>();
 		long timetosql = 0;
 		try {
 			long startTime=System.currentTimeMillis();
-			list.add(testTableService.findById(100));
+			list = testTableService.findByName(findName);
 			long endTime=System.currentTimeMillis();
 			timetosql = endTime - startTime;
 		} catch (Exception e) {
@@ -43,10 +47,14 @@ public class TestController {
 		view.addObject("profile",config.getTESTPARAM());
 		view.addObject("list", list);
 		view.addObject("customvalue", "This is a custom text.");
-		
-		
-		
 		return view;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/flush")
+	public boolean flush(){
+		
+		return true;
 	}
 	
 	@ResponseBody

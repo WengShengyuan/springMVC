@@ -23,8 +23,6 @@
 			expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.cache.annotation.Cacheable" />
 	</context:component-scan>
 
 	<!-- Allow annotation driven controllers -->

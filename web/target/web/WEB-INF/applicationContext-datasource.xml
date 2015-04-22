@@ -11,13 +11,12 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
 		http://www.springframework.org/schema/aop 
-		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-	">
-
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+	
+	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-	
 		<property name="persistenceProvider" ref="persistenceProvider" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 		<property name="jpaDialect" ref="jpaDialect" />
@@ -28,12 +27,10 @@
 		</property>
 		 <property name="packagesToScan">  
 	        <list>  
-	         
-	           <value>org.company</value>  
+	           <value>org.company.core</value>  
 	        </list>  
       </property>  
 	</bean>
-	
 	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
@@ -54,15 +51,12 @@
 
 
 	<context:annotation-config />
-	<!-- <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean"> 
-		<property name="persistenceUnitName" value="web" /> <property name="jpaVendorAdapter"> 
-		<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"> 
-		<property name="database" value="MYSQL" /> <property name="showSql" value="true" 
-		/> <property name="generateDdl" value="true" /> </bean> </property> </bean> -->
+	
 	<!--事务管理Bean -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	
 	<!--说明事务的配置使用的注解方式 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 

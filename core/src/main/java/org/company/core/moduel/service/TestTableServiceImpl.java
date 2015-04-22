@@ -1,16 +1,14 @@
 package org.company.core.moduel.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.company.core.moduel.dao.TestTableDao;
 import org.company.core.moduel.domain.TestTable;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.Cacheable;
 
 
 @Service("TestTableServiceImpl")
@@ -57,16 +55,19 @@ public class TestTableServiceImpl implements TestTableService{
 	
 	@Override
 	public List<TestTable> findByName(String name) throws Exception {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("name", name);
-		
-		return testTableDao.queryByStringEqualMap(map);
+		return testTableDao.findByName(name);
 	}
 
 	@Transactional
 	@Override
 	public boolean batchAdd(int time) throws Exception {
 		return testTableDao.batchAdd(time);
+	}
+
+	@Override
+	public boolean flushRecord(String name) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
