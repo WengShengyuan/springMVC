@@ -34,13 +34,13 @@
 	
 	
 	<!-- find/create cache拦截器 -->  
-	<bean id="methodCacheInterceptor" class="org.company.core.common.interceptor.MethodCacheInterceptor">
+	<bean id="methodCacheInterceptor" class="org.company.frame.interceptor.MethodCacheInterceptor">
 		<property name="cache">
 			<ref local="demoCache" />
 		</property>
 	</bean>
 	<!-- flush cache拦截器 -->  
-    <bean id="methodCacheAfterAdvice" class="org.company.core.common.interceptor.MethodCacheAfterAdvice">  
+    <bean id="methodCacheAfterAdvice" class="org.company.frame.interceptor.MethodCacheAfterAdvice">  
       <property name="cache">  
         <ref local="demoCache" />  
       </property>  

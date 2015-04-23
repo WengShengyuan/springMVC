@@ -14,6 +14,7 @@ import org.hibernate.ejb.EntityManagerFactoryImpl;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.orm.jpa.EntityManagerFactoryInfo;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Deprecated
@@ -37,7 +38,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
 
-	
 	public T save(Object entity) throws Exception {
 		try {
 			em.persist(entity);
@@ -48,7 +48,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		}
 	}
 
-	
 	public T update(Object entity) throws Exception {
 		try {
 
@@ -60,7 +59,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		}
 	}
 
-	
 	public void delete(Object entity) throws Exception {
 		try {
 			Object object = em.merge(entity);
@@ -181,7 +179,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 			return resultList;
 	}
 
-	
 	@Override
 	public void clearTable() throws Exception {
 		List<T> resultList = null;

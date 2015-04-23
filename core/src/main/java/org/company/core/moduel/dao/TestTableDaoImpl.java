@@ -6,6 +6,7 @@ import java.util.List;
 import org.company.core.moduel.domain.TestTable;
 import org.company.frame.generic.dao.GenericDaoImpl;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository("TestTableDaoImpl")
 public class TestTableDaoImpl extends GenericDaoImpl<TestTable> implements

@@ -21,7 +21,8 @@
 		<property name="persistenceProvider" ref="persistenceProvider" />
 		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.show_sql">true</prop>  
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SybaseASE15Dialect</prop>
 			</props>
 		</property>
 		 <property name="packagesToScan">  
@@ -31,19 +32,7 @@
       </property>  
 	</bean>
 	
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass" value="com.sybase.jdbc3.jdbc.SybDriver" />
-		<property name="jdbcUrl" value="jdbc:sybase:Tds:192.168.137.4:5000/pubs2" />
-		<property name="user" value="sa" />
-		<property name="password" value="123456" />
-		<property name="minPoolSize" value="3" />
-		<property name="maxPoolSize" value="10" />
-	</bean>
-	
-	
-	
-    <bean id="dataSource2"  
+    <bean id="dataSource"  
         class="org.apache.commons.dbcp.BasicDataSource"  
         destroy-method="close">  
         <property name="driverClassName" value="com.sybase.jdbc3.jdbc.SybDriver" />  
@@ -60,16 +49,16 @@
 	
 	
 	
-	
 	<bean id="persistenceProvider" class="org.hibernate.ejb.HibernatePersistence" />
 
-	<bean id="jpaDialect" class="org.hibernate.dialect.SybaseDialect" />
+	<bean id="jpaDialect" class="org.hibernate.dialect.SybaseASE15Dialect" />
 
 
 	<context:annotation-config />
 	
-	<!--事务管理Bean -->
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+	 <!--事务管理Bean -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
+		<property name="type" value="MANAGED"></property>
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	

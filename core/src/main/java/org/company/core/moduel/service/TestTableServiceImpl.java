@@ -22,13 +22,11 @@ public class TestTableServiceImpl implements TestTableService{
 	public TestTable save(TestTable entity) throws Exception {
 		return testTableDao.save(entity);
 	}
-
 	@Transactional
 	@Override
 	public void delete(TestTable entity) throws Exception {
 		testTableDao.delete(entity);
 	}
-	
 	@Transactional
 	@Override
 	public TestTable update(TestTable entity) throws Exception {
@@ -45,7 +43,6 @@ public class TestTableServiceImpl implements TestTableService{
 	public TestTable findById(long id) throws Exception {
 		return testTableDao.findById(id);
 	}
-
 	@Transactional
 	@Override
 	public void clearTable() throws Exception {
@@ -57,14 +54,11 @@ public class TestTableServiceImpl implements TestTableService{
 	public List<TestTable> findByName(String name) throws Exception {
 		return testTableDao.findByName(name);
 	}
-
 	@Transactional
 	@Override
 	public boolean batchAdd(int time) throws Exception {
 		return testTableDao.batchAdd(time);
 	}
-
-
 	@Transactional
 	@Override
 	public boolean updateName(String oldName, String newName) throws Exception {

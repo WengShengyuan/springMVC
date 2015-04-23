@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 
-	<import resource="applicationContext-datasource.xml" />
+	<import resource="applicationContext-datasource-ASE.xml" />
 
 	<!-- 加载*.properties File -->
 	<bean id="webConfig"
@@ -55,7 +55,7 @@
 				<value>methodCachePointCutAdvice</value>
 			</list>
 		</property>
-	</bean>
+	</bean> 
 	
 	
 	<!-- 拦截BEAN -->
