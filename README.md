@@ -80,5 +80,9 @@ to convert to your own project, you have a few changes to make.
  [Spring AOP+ehCache简单缓存系统解决方案](http://blog.csdn.net/linfanhehe/article/details/7690684)
 
  *notice: In multiple pointcut case, pattern scan range should narrow down, to avoid confliction.*
+ 
+* 2015-04-23 add SybaseASE supporte
+
+Transactional current not working properly
 
 
