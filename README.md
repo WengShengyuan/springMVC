@@ -83,6 +83,6 @@ to convert to your own project, you have a few changes to make.
  
 * 2015-04-23 add SybaseASE supporte
 
- >You need to copy jconn4.jar to you Tomcat lib folder.
+ *You need to copy jconn4.jar to you Tomcat lib folder.*
 
 
