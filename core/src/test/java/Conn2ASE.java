@@ -4,7 +4,7 @@ import java.util.*;
 public class Conn2ASE {
     public static void main(String[] args) {
         try {
-            Class.forName("com.sybase.jdbc3.jdbc.SybDriver").newInstance();
+            Class.forName("com.sybase.jdbc4.jdbc.SybDriver").newInstance();
 //            String url = "jdbc:sybase:Tds:198.216.1.3:5100/SYZN_Connect13";// 数据库名
 //            sysProps.put("user", "sa"); // 设置数据库访问用户名
 //            sysProps.put("password", "glzzjrh"); // 密码

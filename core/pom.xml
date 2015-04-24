@@ -392,10 +392,10 @@
 		</dependency>
 		<dependency>  
     		<groupId>com.sybase</groupId>  
-    		<artifactId>jdbc3</artifactId>  
+    		<artifactId>jdbc4</artifactId>  
     		<version>1.0</version>  
     		<scope>system</scope>  
-    		<systemPath>${project.basedir}/src/main/resources/jconn3.jar</systemPath>  
+    		<systemPath>${project.basedir}/src/main/resources/jconn4.jar</systemPath>  
 		</dependency> 
 
 

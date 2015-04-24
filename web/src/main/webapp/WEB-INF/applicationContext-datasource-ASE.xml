@@ -35,7 +35,7 @@
     <bean id="dataSource"  
         class="org.apache.commons.dbcp.BasicDataSource"  
         destroy-method="close">  
-        <property name="driverClassName" value="com.sybase.jdbc3.jdbc.SybDriver" />  
+        <property name="driverClassName" value="com.sybase.jdbc4.jdbc.SybDriver" />  
         <property name="url"  
             value="jdbc:sybase:Tds:192.168.137.4:5000/pubs2" />  
         <property name="username" value="sa" />  
@@ -58,7 +58,6 @@
 	
 	 <!--事务管理Bean -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
-		<property name="type" value="MANAGED"></property>
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	

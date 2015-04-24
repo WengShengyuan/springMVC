@@ -17,7 +17,7 @@
         http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 
-	<import resource="applicationContext-datasource.xml" />
+	<import resource="applicationContext-datasource-ASE.xml" />
 
 	<!-- 加载*.properties File -->
 	<bean id="webConfig"
@@ -38,13 +38,13 @@
 	
 	
     
-	<!--<import resource="applicationContext-ehcache.xml" />-->
+	<import resource="applicationContext-ehcache.xml" />
 	
 	
 	
 	
 	<!-- AOP 的最终配置 -->
-	<!-- BEAN与find/get 拦截器关联
+	<!-- BEAN与find/get 拦截器关联 -->
 	<bean id="myService" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target">
 			<ref local="testTableServiceBean" />
@@ -55,12 +55,12 @@
 				<value>methodCachePointCutAdvice</value>
 			</list>
 		</property>
-	</bean> -->
+	</bean> 
 	
 	
-	<!-- 拦截BEAN 
+	<!-- 拦截BEAN -->
 	<bean id="testTableServiceBean" class="org.company.core.moduel.service.TestTableServiceImpl">
-	</bean>-->
+	</bean>
 	
 	
 	
