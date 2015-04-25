@@ -87,6 +87,6 @@ to convert to your own project, you have a few changes to make.
  
 * 2015-04-25 add mutiple data connection pool supported
   
- *Using C3P0 to build multiple datasource support, and add a custom datautils to manage these pools.
+ *Using C3P0 to build multiple datasource support, and add a custom datautils to manage these pools.*
 
 
