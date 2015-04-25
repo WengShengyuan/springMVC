@@ -84,5 +84,9 @@ to convert to your own project, you have a few changes to make.
 * 2015-04-23 add SybaseASE supporte
 
  *You need to copy jconn4.jar to you Tomcat lib folder.*
+ 
+* 2015-04-25 add mutiple data connection pool supported
+  
+ *Using C3P0 to build multiple datasource support, and add a custom datautils to manage these pools.
 
 
