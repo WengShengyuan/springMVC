@@ -15,7 +15,7 @@ This is a raw springMVC MAVEN project.
 
 * core
 
-  ** frame(GenericDao, GenericService)
+  ** frame(GenericDao, GenericService, AOPInterceptor)
 
   ** common
 
